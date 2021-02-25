@@ -2,7 +2,8 @@ version: '3.3'
 services:
     zookeeper:
         image: wurstmeister/zookeeper
-        ports:-"2181"
+        ports: 
+          - "2181"
         hostname: zookeeper
     kafka:
         image: wurstmeister/kafka
