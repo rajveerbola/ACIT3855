@@ -1,0 +1,11 @@
+version: 1
+datastore:
+  user: root
+  password: password
+  hostname: acit38555.eastus.cloudapp.azure.com
+  port: 3306
+  db: carpart
+events:
+  hostname: acit38555.eastus.cloudapp.azure.com
+  port: 9092
+  topic: events
