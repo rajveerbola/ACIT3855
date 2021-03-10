@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  description: This API receives orders for car parts or cleaning products
+  version: "1.0.0"
+  title: Reading API
+  contact:
+    email: rajveer_bola@hotmail.com
+tags:
+  - name: carparts 
+    description: Order for car parts
+paths:
+  /orders/car-part:
+    get:
+      tags:
+        - parts
+      summary: gets car parts
+      operationId: app.get_car_part_order
+      description: Gets order
+      parameters:
+        - name: index
+          in: query
+          description: Limits number of items
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarPartOrder'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /orders/cleaning-product:
+    get:
+      tags:
+        - parts
+      summary: gets cleaning products
+      operationId: app.get_cleaning_product_order
+      description: Gets order
+      parameters:
+        - name: index
+          in: query
+          description: Limits number of items
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CleaningProductOrder'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    CarPartOrder:
+      required:
+      - price_id
+      - part_id
+      - name_of_part
+      properties:
+        price_id:
+          type: number
+          format: currency 
+          example: 10.99
+        part_id:
+          type: string
+          example: A12345
+        name_of_part:
+          type: string
+          example: 'Exhaust'
+      type: object
+    CleaningProductOrder:
+      required:
+      - price_id
+      - brand_id
+      - type_id
+      properties:
+        price_id:
+          type: number
+          format: currency
+          example: 10.99
+        brand_id:
+          type: string
+          example: 'Mothers'
+        type_id:
+          type: string
+          example: 'Car Soap'
+      type: object
