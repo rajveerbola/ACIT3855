@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  description: This API receives orders for car parts or cleaning products
+  version: "1.0.0"
+  title: Reading API
+  contact:
+    email: rajveer_bola@hotmail.com
+tags:
+  - name: carparts 
+    description: Order for car parts
+paths:
+  /orders/car-part:
+    post:
+      tags:
+      - carparts
+      summary: posts a car part order
+      operationId: app.car_part_order
+      description: Adds a new car part order
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarPartOrder'
+        description: Reading item to add 
+  /orders/cleaning-product:
+      post:
+        tags:
+          - cleaningproduct
+        summary: orders cleaning product
+        operationId: app.cleaning_product_order
+        description: Adds a new order for cleaning product
+        responses:
+          '201':
+            description: item created
+          '400':
+            description: 'invalid input, object invalid'
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CleaningProductOrder'
+          description: Reading item to add
+components:
+  schemas:
+    CarPartOrder:
+      required:
+      - price_id
+      - part_id
+      - name_of_part
+      properties:
+        price_id:
+          type: number
+          format: currency 
+          example: 10.99
+        part_id:
+          type: string
+          example: A12345
+        name_of_part:
+          type: string
+          example: 'Exhaust'
+      type: object
+    CleaningProductOrder:
+      required:
+      - price_id
+      - brand_id
+      - type_id
+      properties:
+        price_id:
+          type: number
+          format: currency
+          example: 10.99
+        brand_id:
+          type: string
+          example: 'Mothers'
+        type_id:
+          type: string
+          example: 'Car Soap'
+      type: object

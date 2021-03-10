@@ -1,0 +1,9 @@
+version: 1
+eventstore1:
+  url: http://localhost:8090/orders/car-part
+eventstore2:
+  url: http://localhost:8090/orders/cleaning-product
+events:
+  hostname: acit38555.eastus.cloudapp.azure.com
+  port: 9092
+  topic: events
