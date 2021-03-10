@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  description: This API receives orders for car parts or cleaning products
+  version: "1.0.0"
+  title: Reading API
+  contact:
+    email: rajveer_bola@hotmail.com
+tags:
+  - name: carparts 
+    description: Order for car parts
+paths:
+  /stats:
+    get:
+      summary: posts a car part order and cleaning product
+      operationId: app.get_stats
+      description: Car part and Cleaning product stats
+      responses:
+        '200':
+          description: Successfully returned a list of car part events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadingStats'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+
+components:
+  schemas:
+    ReadingStats:
+      required:
+      - num_car_parts
+      - num_cleaning_products
+      - average_car_part_price
+      - max_price
+      properties:
+        num_car_parts:
+          type: integer
+          example: 50000
+        num_cleaning_products:
+          type: integer
+          example: 50000
+        average_car_part_price:
+          type: integer
+          example: 1099
+        max_price:
+          type: integer
+          example: 50000
+      type: object
