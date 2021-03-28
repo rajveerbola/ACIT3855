@@ -44,20 +44,31 @@ def populate_stats():
     cleaning = requests.get(f"{app_config['eventstore']['url']}/orders/cleaning-product",
                             params={"timestamp": stats['last_updated']})
 
-    stats['num_car_parts'] = len(carpart.json())
-    stats['num_cleaning_products'] = len(cleaning.json())
+    carpart_results = carpart.json()
+    cleaning_results = cleaning.json()
 
-    sum_price = 0
-    max_price = 0
+    if carpart.status_code == 200:
 
-    for event in carpart.json():
-        print(carpart.json())
-        sum_price += event['price_id']
-        if event['price_id'] > max_price:
-            max_price = event['price_id']
-    if len(carpart.json()) > 0:
-        stats['average_car_part_price'] = sum_price / len(carpart.json())
-    stats['max_price'] = max_price
+    	stats['num_car_parts'] = len(carpart_results)
+
+	sum_price = 0
+    	max_price = 0
+
+    	for event in carpart_results:
+            print(carpart_results)
+            sum_price += event['price_id']
+            if event['price_id'] > max_price:
+            	max_price = event['price_id']
+        stats['max_price'] = max_price
+
+    	if len(carpart.json()) > 0:
+            stats['average_car_part_price'] = sum_price / len(carpart.json())
+
+    if cleaning.status_code == 200:
+
+	stats['num_cleaning_products'] = len(cleaning_results)
+
+
     stats['last_updated'] = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     with open(stats_file_name, 'w') as f:
         f.write(json.dumps(stats, indent=4))

@@ -5,14 +5,14 @@ LABEL maintainer="rajveer_bola@hotmail.com"
 RUN apt-get update -y && \ 
   apt-get install -y python3 python3-pip
   
- COPY ./requirements.txt/app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
  
- WORKDIR /app
+WORKDIR /app
  
- RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt
  
- COPY ./app
+COPY . /app
  
- ENTRYPOINT [ "python3"]
+ENTRYPOINT [ "python3"]
  
- CMD [ "app.py" ] 
+CMD [ "app.py" ] 
