@@ -6,7 +6,8 @@ import logging
 from logging import config
 from datetime import datetime
 import json
-from pykafka import KafkaClient
+from pykafka import KafkaClient 
+from flask_cors import CORS, cross_origin
 
 
 with open("app_conf.yaml", "r") as f:
@@ -82,8 +83,9 @@ def get_cleaning_product_order(index):
 
 
 app = connexion.FlaskApp(__name__, specification_dir='')
+CORS(app.app)
+app.app.config['CORS_HEADERS'] = 'Content-Type'
 app.add_api("openapi.yaml", strict_validation=True, validate_responses=True)
-
 
 if __name__ == "__main__":
     app.run(port=8110)
