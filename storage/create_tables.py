@@ -17,7 +17,7 @@ c.execute('''
 c.execute('''
           CREATE TABLE cleaning_product_order
           (id INT NOT NULL AUTO_INCREMENT,
-          price_id VARCHAR(250) NOT NULL,
+          price_id INT NOT NULL,
            brand_id VARCHAR(250) NOT NULL,
            type_id VARCHAR(250) NOT NULL,
            date_created VARCHAR(100) NOT NULL,
