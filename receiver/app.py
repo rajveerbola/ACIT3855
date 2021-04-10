@@ -12,11 +12,11 @@ import json
 
 if "TARGET_ENV"inos.environ andos.environ["TARGET_ENV"] == "test":
     print("In Test Environment")
-    app_conf_file = "/config/app_conf.yaml"
+    app_conf_file = "/config/app_conf.yml"
     log_conf_file = "/config/log_conf.yaml"
 else:
     print("In Dev Environment")
-    app_conf_file = "app_conf.yaml"
+    app_conf_file = "app_conf.yml"
     log_conf_file = "log_conf.yaml"
     
 with open(app_conf_file, 'r') as f:
