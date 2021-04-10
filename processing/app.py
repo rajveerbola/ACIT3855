@@ -12,10 +12,10 @@ import json
 import datetime
 import os
 
-if"TARGET_ENV"inos.environ andos.environ["TARGET_ENV"] == "test":
-   print("In Test Environment")
-   app_conf_file = "/config/app_conf.yaml"
-   log_conf_file = "/config/log_conf.yaml"
+if "TARGET_ENV"inos.environ andos.environ["TARGET_ENV"] == "test":
+    print("In Test Environment")
+    app_conf_file = "/config/app_conf.yaml"
+    log_conf_file = "/config/log_conf.yaml"
 else:
     print("In Dev Environment")
     app_conf_file = "app_conf.yaml"
