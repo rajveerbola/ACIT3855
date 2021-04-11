@@ -83,14 +83,18 @@ def cleaning_product_order(body):
     
 
 
-def get_car_part_order(timestamp):
+def get_car_part_order(start_timestamp, end_timestamp):
     session = DB_SESSION()
 
-    timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
+    start_timestamp_datetime = 
+        datetime.datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S")
+    end_timestamp_datetime = 
+        datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")      
     print(timestamp_datetime)
 
-    readings = session.query(CarPartOrder).filter(CarPartOrder.date_created >=
-                                                  timestamp_datetime)
+    readings = session.query(CarPartOrder).filter(and_(CarPartOrder.date_created >=
+                                                start_timestamp_datetime,
+                                                CarPartOrder.date_created < end_timestamp_datetime))
     results_list = []
 
     for reading in readings:
@@ -103,14 +107,18 @@ def get_car_part_order(timestamp):
     return results_list, 200
 
 
-def get_cleaning_product_order(timestamp):
+def get_cleaning_product_order(start_timestamp, end_timestamp):
     session = DB_SESSION()
 
-    timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
+    start_timestamp_datetime = 
+        datetime.datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S")
+    end_timestamp_datetime = 
+        datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")      
     print(timestamp_datetime)
 
-    readings = session.query(CleaningProductOrder).filter(CleaningProductOrder.date_created >=
-                                                          timestamp_datetime)
+        readings = session.query(CleaningProductOrder).filter(and_(CleaningProductOrder.date_created >=
+                                                start_timestamp_datetime,
+                                                CleaningProductOrder.date_created < end_timestamp_datetime))
     results_list = []
     print(readings)
     for reading in readings:
