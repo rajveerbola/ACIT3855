@@ -58,7 +58,7 @@ def populate_stats():
                  }
 
     carpart = requests.get(f"{app_config['eventstore']['url']}/orders/car-part",
-                           params={"timestamp": stats['last_updated']})
+                           params={"start_timestamp": stats['last_updated']})
     cleaning = requests.get(f"{app_config['eventstore']['url']}/orders/cleaning-product",
                             params={"timestamp": stats['last_updated']})
 
