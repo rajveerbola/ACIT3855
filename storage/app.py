@@ -131,6 +131,9 @@ def get_cleaning_product_order(start_timestamp, end_timestamp):
     return results_list, 200
 
 def process_messages():
+                 
+    retry = 0
+    logger.info("Connecting to Kafka" retry)
 
     hostname = "%s:%d" % (app_config["events"]["hostname"], 
                           app_config["events"]["port"])
@@ -140,6 +143,7 @@ def process_messages():
     consumer = topic.get_simple_consumer(consumer_group=b'event_group',
                                          reset_offset_on_start=False,
                                          auto_offset_reset=OffsetType.LATEST)
+       
     for msg in consumer:
         msg_str = msg.value.decode('utf-8')
         msg = json.loads(msg_str)
