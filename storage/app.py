@@ -83,14 +83,18 @@ def cleaning_product_order(body):
     
 
 
-def get_car_part_order(timestamp):
+def get_car_part_order(start_timestamp, end_timestamp):
     session = DB_SESSION()
 
-    timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
+    start_timestamp_datetime = 
+        datetime.datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S")
+    end_timestamp_datetime = 
+        datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")      
     print(timestamp_datetime)
 
-    readings = session.query(CarPartOrder).filter(CarPartOrder.date_created >=
-                                                  timestamp_datetime)
+    readings = session.query(CarPartOrder).filter(and_(CarPartOrder.date_created >=
+                                                start_timestamp_datetime,
+                                                CarPartOrder.date_created < end_timestamp_datetime))
     results_list = []
 
     for reading in readings:
@@ -103,14 +107,18 @@ def get_car_part_order(timestamp):
     return results_list, 200
 
 
-def get_cleaning_product_order(timestamp):
+def get_cleaning_product_order(start_timestamp, end_timestamp):
     session = DB_SESSION()
 
-    timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
+    start_timestamp_datetime = 
+        datetime.datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S")
+    end_timestamp_datetime = 
+        datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")      
     print(timestamp_datetime)
 
-    readings = session.query(CleaningProductOrder).filter(CleaningProductOrder.date_created >=
-                                                          timestamp_datetime)
+        readings = session.query(CleaningProductOrder).filter(and_(CleaningProductOrder.date_created >=
+                                                start_timestamp_datetime,
+                                                CleaningProductOrder.date_created < end_timestamp_datetime))
     results_list = []
     print(readings)
     for reading in readings:
@@ -123,6 +131,9 @@ def get_cleaning_product_order(timestamp):
     return results_list, 200
 
 def process_messages():
+                 
+    retry = 0
+    logger.info("Connecting to Kafka" retry)
 
     hostname = "%s:%d" % (app_config["events"]["hostname"], 
                           app_config["events"]["port"])
@@ -132,6 +143,7 @@ def process_messages():
     consumer = topic.get_simple_consumer(consumer_group=b'event_group',
                                          reset_offset_on_start=False,
                                          auto_offset_reset=OffsetType.LATEST)
+       
     for msg in consumer:
         msg_str = msg.value.decode('utf-8')
         msg = json.loads(msg_str)
@@ -150,7 +162,7 @@ def process_messages():
 
 
 app = connexion.FlaskApp(__name__, specification_dir='')
-app.add_api("openapi.yaml", strict_validation=True, validate_responses=True)
+app.add_api("openapi.yaml", base_path="/storage", strict_validation=True, validate_responses=True)
 
 if __name__ == "__main__":
     t1 = Thread(target=process_messages)

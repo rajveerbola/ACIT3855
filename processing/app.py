@@ -56,11 +56,24 @@ def populate_stats():
                  'max_price': 0,
                  'last_updated': datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
                  }
-
+  try:
     carpart = requests.get(f"{app_config['eventstore']['url']}/orders/car-part",
-                           params={"timestamp": stats['last_updated']})
+                           params={"start_timestamp": stats['last_updated']: "end_timestamp": 
+                                   "current_timestamp"})
+  except:
+    carpart = None
+  if carpart not None:
+  
+  try:
+    carpart = requests.get(f"{app_config['eventstore']['url']}/orders/car-part",
+                           params={"start_timestamp": stats['last_updated']: "end_timestamp": 
+                                   "current_timestamp"})
+  except Exception as e:
+    logger.error(str(e))
+    carpart = None
     cleaning = requests.get(f"{app_config['eventstore']['url']}/orders/cleaning-product",
-                            params={"timestamp": stats['last_updated']})
+                            params={"start_timestamp": stats['last_updated']: "end_timestamp":
+                                   "current_timestamp})
 
     carpart_results = carpart.json()
     cleaning_results = cleaning.json()
@@ -103,9 +116,10 @@ def init_scheduler():
 
 
 app = connexion.FlaskApp(__name__, specification_dir='')
-#CORS(app.app)
-#app.app.config['CORS_HEADERS'] = 'Content-Type'
-app.add_api("openapi.yaml", strict_validation=True, validate_responses=True)
+if "TARGET_ENV"  in os.environ or os.environ["TARGET_ENV"] != "test":
+    CORS(app.app)
+    app.app.config['CORS_HEADERS'] = 'Content-Type'
+app.add_api("openapi.yaml", base_path="/processing", strict_validation=True, validate_responses=True)
 
 if __name__ == "__main__":
     init_scheduler()
