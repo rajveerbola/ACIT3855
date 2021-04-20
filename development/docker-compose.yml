@@ -137,7 +137,7 @@ services:
      networks:
        - "api.network"
 
-# Names our volume
+# Names our volum
 volumes:
   my-db:
   processing-db:
