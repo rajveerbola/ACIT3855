@@ -83,6 +83,6 @@ services:
         - "audit_log"
        
 
-# Names our volum
+# Names our volu
 volumes:
   my-db:
