@@ -44,16 +44,12 @@ services:
     volumes:
       - my-db:/var/lib/mysql
 
-<<<<<<< HEAD
   receiver:
-=======
-receiver:
->>>>>>> 518e8bea9f51b34c41c3ca15f051e2d261e984d5
-    image: receiver
-    ports:
-      - "8080:8080"
-    depends_on:
-      - "kafka"
+     image: receiver
+     ports:
+       - "8080:8080"
+     depends_on:
+       - "kafka"
 
   storage:
     image: storage
@@ -77,9 +73,6 @@ receiver:
       - "8110:8110"
     depends_on:
       - "kafka"
-<<<<<<< HEAD
-
-=======
       
   dashboard:
       image: dashboard
@@ -89,7 +82,7 @@ receiver:
         - "processing"
         - "audit_log"
        
->>>>>>> 518e8bea9f51b34c41c3ca15f051e2d261e984d5
+
 # Names our volume
 volumes:
   my-db:
