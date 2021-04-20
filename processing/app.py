@@ -56,21 +56,11 @@ def populate_stats():
                  'max_price': 0,
                  'last_updated': datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
                  }
-  try:
+
     carpart = requests.get(f"{app_config['eventstore']['url']}/orders/car-part",
                            params={"start_timestamp": stats['last_updated']: "end_timestamp": 
                                    "current_timestamp"})
-  except:
-    carpart = None
-  if carpart not None:
-  
-  try:
-    carpart = requests.get(f"{app_config['eventstore']['url']}/orders/car-part",
-                           params={"start_timestamp": stats['last_updated']: "end_timestamp": 
-                                   "current_timestamp"})
-  except Exception as e:
-    logger.error(str(e))
-    carpart = None
+
     cleaning = requests.get(f"{app_config['eventstore']['url']}/orders/cleaning-product",
                             params={"start_timestamp": stats['last_updated']: "end_timestamp":
                                    "current_timestamp})
