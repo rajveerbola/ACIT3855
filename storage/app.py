@@ -17,7 +17,7 @@ from car_part_order import CarPartOrder
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-if "TARGET_ENV"inos.environ andos.environ["TARGET_ENV"] == "test":
+if "TARGET_ENV" in os.environ and os.environ["TARGET_ENV"] == "test":
     print("In Test Environment")
     app_conf_file = "/config/app_conf.yaml"
     log_conf_file = "/config/log_conf.yaml"
