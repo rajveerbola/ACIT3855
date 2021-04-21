@@ -133,7 +133,7 @@ def get_cleaning_product_order(start_timestamp, end_timestamp):
 def process_messages():
                  
     retry = 0
-    max_retry = 0
+    max_retry = 100
     
     while retry < max_retry
         logger.info("Connecting to Kafka" {retry} of {max_retry})
