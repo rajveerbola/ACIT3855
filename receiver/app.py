@@ -33,7 +33,20 @@ logger = logging.getLogger('basicLogger')
 logger.info("App Conf File: %s"% app_conf_file)
 logger.info("Log Conf File: %s"% log_conf_file)
 
+retry = 0
+    max_retry = 100
+    
+    while retry < max_retry
+        logger.info("Connecting to Kafka" {retry} of {max_retry})
+        try:
 
+            client = KafkaClient(hosts=hostname)
+            topic = client.topics[str.encode(app_config["events"]["topic"])] 
+        
+        expect:
+                 logger.error("Failed to connect to Kafka")
+                 retry += 1
+                 time.sleep(3)
 
 
 
@@ -64,7 +77,7 @@ def cleaning_product_order(body):
     headers = {'Content-Type': 'application/json'}
     hostname = "%s:%d" % (app_config["events"]["hostname"],  
                             app_config["events"]["port"])
-    client = KafkaClient(hosts=hostname)
+   
     topic = client.topics[str.encode(app_config['events']['topic'])]
     producer =  topic.get_sync_producer()
 
