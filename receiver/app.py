@@ -34,12 +34,16 @@ logger.info("App Conf File: %s"% app_conf_file)
 logger.info("Log Conf File: %s"% log_conf_file)
 
 
+
+
+
+
 def car_part_order(body):
     logger.info(f'Received event car part request with a unique id of {body["part_id"]}')
     headers = {'Content-Type': 'application/json'}
     hostname = "%s:%d" % (app_config["events"]["hostname"],  
                             app_config["events"]["port"])
-    client = KafkaClient(hosts=hostname)
+    
     topic = client.topics[str.encode(app_config['events']['topic'])]
     producer =  topic.get_sync_producer()
 
