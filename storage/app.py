@@ -133,16 +133,27 @@ def get_cleaning_product_order(start_timestamp, end_timestamp):
 def process_messages():
                  
     retry = 0
-    logger.info("Connecting to Kafka" retry)
+    max_retry = 0
+    
+    while retry < max_retry
+        logger.info("Connecting to Kafka" {retry} of {max_retry})
+        try:
 
+            client = KafkaClient(hosts=hostname)
+            topic = client.topics[str.encode(app_config["events"]["topic"])] 
+        
+        expect:
+                 logger.error("Failed to connect to Kafka")
+                 retry += 1
+                 time.sleep(3)
+                 
+                     
     hostname = "%s:%d" % (app_config["events"]["hostname"], 
                           app_config["events"]["port"])
-    client = KafkaClient(hosts=hostname)
-    topic = client.topics[str.encode(app_config["events"]["topic"])] 
 
     consumer = topic.get_simple_consumer(consumer_group=b'event_group',
-                                         reset_offset_on_start=False,
-                                         auto_offset_reset=OffsetType.LATEST)
+                                            reset_offset_on_start=False,
+                                            auto_offset_reset=OffsetType.LATEST)
        
     for msg in consumer:
         msg_str = msg.value.decode('utf-8')
