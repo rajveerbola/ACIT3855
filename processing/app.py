@@ -87,7 +87,7 @@ def populate_stats():
 
     if cleaning.status_code == 200:
 
-	stats['num_cleaning_products'] = len(cleaning_results)
+        stats['num_cleaning_products'] = len(cleaning_results)
 
 
     stats['last_updated'] = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
