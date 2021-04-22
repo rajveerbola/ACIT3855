@@ -108,10 +108,8 @@ def get_car_part_order(start_timestamp, end_timestamp):
 def get_cleaning_product_order(start_timestamp, end_timestamp):
     session = DB_SESSION()
 
-    start_timestamp_datetime = 
-        datetime.datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S")
-    end_timestamp_datetime = 
-        datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")      
+    start_timestamp_datetime = datetime.datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S")
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")      
     print(timestamp_datetime)
 
         readings = session.query(CleaningProductOrder).filter(and_(CleaningProductOrder.date_created >=
