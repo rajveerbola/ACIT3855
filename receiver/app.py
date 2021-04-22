@@ -37,7 +37,7 @@ retry = 0
 max_retry = 100
     
 while retry < max_retry:
-   logger.info("Connecting to Kafka" {retry} of {max_retry})
+   logger.info("Connecting to Kafka {retry} of {max_retry}")
    try:
 
       client = KafkaClient(hosts=hostname)
