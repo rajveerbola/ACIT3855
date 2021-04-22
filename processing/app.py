@@ -70,10 +70,10 @@ def populate_stats():
 
     if carpart.status_code == 200:
 
-    	stats['num_car_parts'] = len(carpart_results)
-
-	sum_price = 0
-    	max_price = 0
+        stats['num_car_parts'] = len(carpart_results)
+	
+        sum_price = 0
+        max_price = 0
 
     	for event in carpart_results:
             print(carpart_results)
