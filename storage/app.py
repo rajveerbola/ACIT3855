@@ -101,7 +101,7 @@ def get_car_part_order(start_timestamp, end_timestamp):
 
     session.close()
 
-    logger.info("Query for Car Part Order after %s returns %d results" % (timestamp, len(results_list)))
+    logger.info("Query for Car Part Order after %s returns %d results" % (start_timestamp, len(results_list)))
 
     return results_list, 200
 
@@ -123,7 +123,7 @@ def get_cleaning_product_order(start_timestamp, end_timestamp):
 
     session.close()
 
-    logger.info("Query for Cleaning Product Order after %s returns %d results" % (timestamp, len(results_list)))
+    logger.info("Query for Cleaning Product Order after %s returns %d results" % (start_timestamp, len(results_list)))
 
     return results_list, 200
 
