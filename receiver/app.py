@@ -36,12 +36,12 @@ logger.info("App Conf File: %s"% app_conf_file)
 logger.info("Log Conf File: %s"% log_conf_file)
 
 retry = 0
-max_retry = 100
+max_retry = 10
 hostname = "%s:%d" % (app_config["events"]["hostname"],  
                             app_config["events"]["port"])
     
 while retry < max_retry:
-   logger.info("Connecting to Kafka {retry} of {max_retry}")
+   logger.info(f"Connecting to Kafka {retry} of {max_retry}")
    try:
 
       client = KafkaClient(hosts=hostname)
