@@ -45,7 +45,8 @@ while retry < max_retry:
    try:
 
       client = KafkaClient(hosts=hostname)
-      topic = client.topics[str.encode(app_config["events"]["topic"])] 
+      topic = client.topics[str.encode(app_config["events"]["topic"])]
+      break
         
    except:
          logger.error("Failed to connect to Kafka")
