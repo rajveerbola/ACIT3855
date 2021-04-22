@@ -82,7 +82,7 @@ def populate_stats():
             	max_price = event['price_id']
         stats['max_price'] = max_price
 
-    	if len(carpart.json()) > 0:
+        if len(carpart.json()) > 0:
             stats['average_car_part_price'] = sum_price / len(carpart.json())
 
     if cleaning.status_code == 200:
