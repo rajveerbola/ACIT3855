@@ -112,9 +112,9 @@ def get_cleaning_product_order(start_timestamp, end_timestamp):
     end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S")      
     print(timestamp_datetime)
 
-        readings = session.query(CleaningProductOrder).filter(and_(CleaningProductOrder.date_created >=
-                                                start_timestamp_datetime,
-                                                CleaningProductOrder.date_created < end_timestamp_datetime))
+    readings = session.query(CleaningProductOrder).filter(and_(CleaningProductOrder.date_created >=
+                                            start_timestamp_datetime,
+                                            CleaningProductOrder.date_created < end_timestamp_datetime))
     results_list = []
     print(readings)
     for reading in readings:
