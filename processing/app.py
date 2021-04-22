@@ -75,7 +75,7 @@ def populate_stats():
         sum_price = 0
         max_price = 0
 
-    	for event in carpart_results:
+        for event in carpart_results:
             print(carpart_results)
             sum_price += event['price_id']
             if event['price_id'] > max_price:
