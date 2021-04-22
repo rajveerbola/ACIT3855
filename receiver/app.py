@@ -34,19 +34,19 @@ logger.info("App Conf File: %s"% app_conf_file)
 logger.info("Log Conf File: %s"% log_conf_file)
 
 retry = 0
-    max_retry = 100
+max_retry = 100
     
-    while retry < max_retry:
-        logger.info("Connecting to Kafka" {retry} of {max_retry})
-        try:
+while retry < max_retry:
+   logger.info("Connecting to Kafka" {retry} of {max_retry})
+   try:
 
-            client = KafkaClient(hosts=hostname)
-            topic = client.topics[str.encode(app_config["events"]["topic"])] 
+      client = KafkaClient(hosts=hostname)
+      topic = client.topics[str.encode(app_config["events"]["topic"])] 
         
-        except:
-                 logger.error("Failed to connect to Kafka")
-                 retry += 1
-                 time.sleep(3)
+    except:
+          logger.error("Failed to connect to Kafka")
+          retry += 1
+          time.sleep(3)
 
 
 
