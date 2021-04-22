@@ -43,7 +43,7 @@ retry = 0
             client = KafkaClient(hosts=hostname)
             topic = client.topics[str.encode(app_config["events"]["topic"])] 
         
-        expect:
+        except:
                  logger.error("Failed to connect to Kafka")
                  retry += 1
                  time.sleep(3)
