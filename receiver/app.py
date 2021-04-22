@@ -36,7 +36,7 @@ logger.info("Log Conf File: %s"% log_conf_file)
 retry = 0
     max_retry = 100
     
-    while retry < max_retry
+    while retry < max_retry:
         logger.info("Connecting to Kafka" {retry} of {max_retry})
         try:
 
