@@ -56,14 +56,16 @@ def populate_stats():
                  'max_price': 0,
                  'last_updated': datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
                  }
-
+    
+    current_timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+	
     carpart = requests.get(f"{app_config['eventstore']['url']}/orders/car-part",
                            params={"start_timestamp": stats['last_updated'], "end_timestamp": 
-                                   "current_timestamp"})
+                                    current_timestamp})
 
     cleaning = requests.get(f"{app_config['eventstore']['url']}/orders/cleaning-product",
                             params={"start_timestamp": stats['last_updated'], "end_timestamp":
-                                   "current_timestamp"})
+                                     current_timestamp})
 
     carpart_results = carpart.json()
     cleaning_results = cleaning.json()
@@ -90,7 +92,7 @@ def populate_stats():
         stats['num_cleaning_products'] = len(cleaning_results)
 
 
-    stats['last_updated'] = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+    stats['last_updated'] = current_timestamp
     print(stats)
     with open(stats_file_name, 'w') as f:
         f.write(json.dumps(stats, indent=4))
