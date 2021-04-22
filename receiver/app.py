@@ -8,7 +8,8 @@ from pykafka import KafkaClient
 import datetime
 import os 
 import json
-import datetime
+import datetime 
+import time
 
 
 if "TARGET_ENV" in os.environ and os.environ["TARGET_ENV"] == "test":
