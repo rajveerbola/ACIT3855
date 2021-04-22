@@ -130,7 +130,8 @@ def process_messages():
                  
     retry = 0
     max_retry = 100
-    
+    hostname = "%s:%d" % (app_config["events"]["hostname"], 
+                              app_config["events"]["port"])
     while retry < max_retry:
         logger.info(f"Connecting to Kafka {retry} of {max_retry}")
         try:
@@ -144,8 +145,7 @@ def process_messages():
                  time.sleep(3)
                  
                      
-    hostname = "%s:%d" % (app_config["events"]["hostname"], 
-                          app_config["events"]["port"])
+
 
     consumer = topic.get_simple_consumer(consumer_group=b'event_group',
                                             reset_offset_on_start=False,
