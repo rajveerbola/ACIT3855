@@ -34,7 +34,14 @@ paths:
       operationId: app.get_car_part_order
       description: Gets order
       parameters:
-        - name: timestamp
+        - name: start_timestamp
+          in: query
+          description: Limits number of items
+          schema:
+            type: string
+            format: date-time
+            example: 2016-08-29T09:12:33.001Z
+        - name: end_timestamp
           in: query
           description: Limits number of items
           schema:
@@ -86,7 +93,14 @@ paths:
         operationId: app.get_cleaning_product_order
         description: Gets order
         parameters:
-          - name: timestamp
+          - name: start_timestamp
+            in: query
+            description: Limits number of items
+            schema:
+              type: string
+              format: date-time
+              example: 2016-08-29T09:12:33.001Z
+          - name: end_timestamp
             in: query
             description: Limits number of items
             schema:
