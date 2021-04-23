@@ -72,7 +72,7 @@ def populate_stats():
 
     if carpart.status_code == 200:
 
-        stats['num_car_parts'] = len(carpart_results)
+        stats['num_car_parts'] += len(carpart_results)
 	
         sum_price = 0
         max_price = 0
@@ -89,7 +89,7 @@ def populate_stats():
 
     if cleaning.status_code == 200:
 
-        stats['num_cleaning_products'] = len(cleaning_results)
+        stats['num_cleaning_products'] += len(cleaning_results)
 
 
     stats['last_updated'] = current_timestamp
